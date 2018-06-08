@@ -1,62 +1,8 @@
 
-#include "hw_stm32f030_mini.h"
-
-void delay(unsigned int timeout)
-{
-    unsigned int t1, t2;
-    for (t1 = 0; t1 < timeout; t1++)
-    {
-        for (t2 = 0; t2 < 0xFFF; t2++)
-        {
-          asm(" nop");
-        }
-    }
-}
-
-void enable_clock(void)
-{
-  /* GPIOC */
-  unsigned long int tmpreg;
-  tmpreg = read_reg(RCC_AHBENR, ~RCC_AHBENR_IOPCEN);
-  tmpreg = tmpreg | RCC_AHBENR_IOPCEN;
-  write_reg(RCC_AHBENR, tmpreg);
-  delay(10);
-}
-
-void init_pin(void)
-{
-  /* set mode pc9 - Led LD3 */
-  write_reg(GPIOC_MODER, GPIO_MODE_OUTPUT << 18);
-  /* set mode pc8 - Led LD4 */
-  write_reg(GPIOC_MODER, GPIO_MODE_OUTPUT << 16);
-}
-
-void turn_on_ld4(void)
-{
-  write_reg(GPIOC_ODR, 1 << LD4_PIN);
-}
-
-void turn_off_ld4(void)
-{
-  write_reg(GPIOC_ODR, 0 << LD4_PIN);
-}
-
-void main(void)
-{
-  /* enable clock */
-  enable_clock();
-  /* init led pins */
-  init_pin();
-  while(1)
-  {
-    turn_on_ld4();
-    delay(0xff);
-    turn_off_ld4();
-    delay(0xff);
-  }
-}
+#include "hw_stm32f051r8.h"
 
 
+/*************************************************************************************************/
 void Reserved_IRQHandler(void)
 {
   while(1)
@@ -104,5 +50,58 @@ void SysTick_Handler(void)
     /* nothing to be run here */
   }
 }
+/*************************************************************************************************/
 
+void delay(unsigned int timeout)
+{
+    unsigned int t1, t2;
+    for (t1 = 0; t1 < timeout; t1++)
+    {
+        for (t2 = 0; t2 < 0xFFF; t2++)
+        {
+          asm(" nop");
+        }
+    }
+}
+
+void enabled_clock(void)
+{
+	unsigned int tempreg;
+	/* set mode led ld3 */
+	tempreg = read_reg(RCC_AHBENR, ~(1 << 19));
+	tempreg = tempreg | (1 << 19);
+	write_reg(RCC_AHBENR, tempreg);
+}
+
+void init_pin(void)
+{
+	unsigned int tempreg;
+	/* set mode led ld3 */
+	tempreg = read_reg(GPIOC_MODER, ~(0x03 << 18));
+	tempreg = tempreg | (GPIO_MODER_OUTPUT << 18);
+	write_reg(GPIOC_MODER, tempreg);
+}
+
+void led_on(unsigned char pin_number)
+{
+	write_reg(GPIOC_BSRR, 1u << pin_number);
+}
+
+void led_off(unsigned char pin_number)
+{
+	write_reg(GPIOC_BSRR, 1u << (pin_number + 16u));
+}
+
+void main(void)
+{
+	enabled_clock();
+	init_pin();
+	while(1)
+	{
+		led_on(LD3_PIN);
+		delay(0xff);
+		led_off(LD3_PIN);
+		delay(0xff);
+	}
+}
 
