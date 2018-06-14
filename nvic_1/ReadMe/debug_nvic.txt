@@ -3,7 +3,7 @@ Những điểm cần lưu ý với Interrupt trên MCU:
 
 Một số lỗi có thể xảy ra với interrupt, cách thức debug:
 1. Thiết lập ngoại vi sai:
-- Stop (phụ)
+- Stop debugger (phụ)
 - Mình set cờ pending tương ứng với ngắt trong NVIC
 - Đặt breakpoint trong interrupt handler
 - Go debugger

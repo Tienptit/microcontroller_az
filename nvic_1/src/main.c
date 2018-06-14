@@ -6,6 +6,7 @@ unsigned int led_state = 0;
 
 void led_on(unsigned char pin_number);
 void led_off(unsigned char pin_number);
+void delay(unsigned int timeout);
 
 /*************************************************************************************************/
 void Reserved_IRQHandler(void)
@@ -80,6 +81,16 @@ void EXTI0_1_IRQHandler(void)
 	write_reg(NVIC_ICPR, (1 << 5));
 }
 
+void EXTI2_3_IRQHandler(void)
+{
+	unsigned int temp;
+	delay(0xff);
+	/* xoa co ngat */
+	temp = 1 << 2;
+	write_reg(EXTI_PR, temp);
+	write_reg(NVIC_ICPR, (1 << 6));
+}
+
 /*************************************************************************************************/
 
 void delay(unsigned int timeout)
@@ -122,6 +133,14 @@ void init_pin(void)
 	tempreg = read_reg(GPIOA_MODER, ~(0x03 << 0));
 	tempreg = tempreg | (GPIO_MODER_INPUT << 0);
 	write_reg(GPIOA_MODER, tempreg);
+	/* set mode PA2 */
+	tempreg = read_reg(GPIOA_MODER, ~(0x03 << 2));
+	tempreg = tempreg | (GPIO_MODER_INPUT << 2);
+	write_reg(GPIOA_MODER, tempreg);
+	/* pull up */
+	tempreg = read_reg(GPIOA_PUPDR, ~(0x03 << 4));
+	tempreg = tempreg | (0x01 << 4);
+	write_reg(GPIOA_PUPDR, tempreg);
 }
 
 void init_interrupt(void)
@@ -135,18 +154,37 @@ void init_interrupt(void)
 	tempreg = read_reg(EXTI_RTSR, ~(1 << 0));
 	tempreg = tempreg | (1 << 0);
 	write_reg(EXTI_RTSR, tempreg);
+	/* enable interrupt for EXTI2 */
+	tempreg = read_reg(EXTI_IMR, ~(1 << 2));
+	tempreg = tempreg | (1 << 2);
+	write_reg(EXTI_IMR, tempreg);
+
+	tempreg = read_reg(EXTI_RTSR, ~(1 << 2));
+	tempreg = tempreg | (1 << 2);
+	write_reg(EXTI_RTSR, tempreg);
 	/* SYSCFG */
 	tempreg = read_reg(SYSCFG_EXTICR1, ~(0x0F << 0));
 	tempreg = tempreg | (0x00 << 0);
 	write_reg(SYSCFG_EXTICR1, tempreg);
 	/* NVIC */
+	/* user button */
 	tempreg = read_reg(NVIC_PRI1, ~(0xFF << 8));
 	tempreg = tempreg | (0x01 << 14);
 	write_reg(NVIC_PRI1, tempreg);
-
+	
+	/* PA2 - EXTI2 */
+	tempreg = read_reg(NVIC_PRI1, ~(0xFF << 16));
+	tempreg = tempreg | (0x02 << 22);
+	write_reg(NVIC_PRI1, tempreg);
+	
+	/* user button */
 	tempreg = read_reg(NVIC_ISER, ~(1 << 5));
-	//tempreg = tempreg | (1 << 5);
 	tempreg = tempreg | (1 << 5);
+	write_reg(NVIC_ISER, tempreg);
+	
+	/* PA2 - EXTI2 */
+	tempreg = read_reg(NVIC_ISER, ~(1 << 6));
+	tempreg = tempreg | (1 << 6);
 	write_reg(NVIC_ISER, tempreg);
 	/* enable global interrupt */
 	asm("cpsie i");

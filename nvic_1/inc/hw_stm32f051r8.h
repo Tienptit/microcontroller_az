@@ -23,6 +23,8 @@
 
 #define GPIOA_IDR			(BASE_ADDR_GPIOA + 0x10u)
 
+#define GPIOA_PUPDR			(BASE_ADDR_GPIOA + 0x0Cu)
+
 /* Led LD3 - PC9 */
 #define LD3_PIN				9
 #define LD4_PIN				8
