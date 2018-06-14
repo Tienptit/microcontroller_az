@@ -10,9 +10,10 @@ A. NVIC (Nested Vectored Interrupt Controller):
 			--> EXTI_IMR
 			--> thiết lập sường ngắt
 		-> SYSCFG : SYSCFG_EXTICR1[EXTI0[3:0]]
-		
+
 	- Thiết lập mức priority
 		-> NVIC_IPR
+	- Xoá cờ ngắt
 	- Enable interrupt từ NVIC
 	- Bật ngắt toàn cục (enable global interrupt) bằng việc sử dụng lệnh ASM: cpsie i
 
