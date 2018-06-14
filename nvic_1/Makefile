@@ -8,7 +8,8 @@ INC_DIR		:= $(PRO_DIR)/inc
 SRC_DIR 	:= $(PRO_DIR)/src
 LINKER_FILE	:= $(PRO_DIR)/linker/stm32f0_discovery.ld
 
-COMPILER_DIR 	:= C:/tools/gcc_7_2017-q4-major
+# COMPILER_DIR 	:= C:/tools/gcc_7_2017-q4-major
+COMPILER_DIR 	:= /Users/anhvt6/tools/gcc-arm-none-eabi-7-2017-q4-major
 
 PREFIX_GCC_COMPILER	:= arm-none-eabi
 CC				:= $(COMPILER_DIR)/bin/$(PREFIX_GCC_COMPILER)-gcc
@@ -32,7 +33,7 @@ $(OUTPUT_PATH)/startup_ARMCM0.o: $(SRC_DIR)/startup_ARMCM0.S
 build: $(FILE_TO_LINK) $(LINKER_FILE)
 	@echo "link object files to create new binary image ($(PROJ_NAME).elf)"
 	$(LD) $(LD_OPT) -o $(OUTPUT_PATH)/$(PROJ_NAME).elf
-	
+
 clean:
 	@rm -rf $(OUTPUT_PATH)/*
 

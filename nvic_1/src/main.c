@@ -134,7 +134,7 @@ void init_interrupt(void)
 
 	tempreg = read_reg(EXTI_RTSR, ~(1 << 0));
 	tempreg = tempreg | (1 << 0);
-	write_reg(EXTI_RTSR, tempreg);
+	//write_reg(EXTI_RTSR, tempreg);
 	/* SYSCFG */
 	tempreg = read_reg(SYSCFG_EXTICR1, ~(0x0F << 0));
 	tempreg = tempreg | (0x00 << 0);
@@ -143,12 +143,14 @@ void init_interrupt(void)
 	tempreg = read_reg(NVIC_PRI1, ~(0xFF << 8));
 	tempreg = tempreg | (0x01 << 14);
 	write_reg(NVIC_PRI1, tempreg);
-	
+
 	tempreg = read_reg(NVIC_ISER, ~(1 << 5));
-	tempreg = tempreg | (1 << 5);
+	//tempreg = tempreg | (1 << 5);
+	tempreg = tempreg | (1 << 6);
 	write_reg(NVIC_ISER, tempreg);
 	/* enable global interrupt */
-	asm("cpsie i");
+	//asm("cpsie i");
+	asm("cpsid i");
 }
 
 void led_on(unsigned char pin_number)
