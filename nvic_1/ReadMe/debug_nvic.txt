@@ -17,5 +17,5 @@ Một số lỗi có thể xảy ra với interrupt, cách thức debug:
 3. Thiết lập Core sai:
 - liên quan đến thanh ghi PRIMASK
 
-Cách thức để kiểm tra
-- Kiểm tra xem cờ pending của ngoại vi + NVIC đã được bật chưa => kết luận luôn là có thể core đang bị sai
+- Cách thức để kiểm tra
+	-> Kiểm tra xem cờ pending của ngoại vi + NVIC đã được bật chưa => kết luận luôn là có thể core đang bị sai
