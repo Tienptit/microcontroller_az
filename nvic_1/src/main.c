@@ -134,8 +134,8 @@ void init_pin(void)
 	tempreg = tempreg | (GPIO_MODER_INPUT << 0);
 	write_reg(GPIOA_MODER, tempreg);
 	/* set mode PA2 */
-	tempreg = read_reg(GPIOA_MODER, ~(0x03 << 2));
-	tempreg = tempreg | (GPIO_MODER_INPUT << 2);
+	tempreg = read_reg(GPIOA_MODER, ~(0x03 << 4));
+	tempreg = tempreg | (GPIO_MODER_INPUT << 4);
 	write_reg(GPIOA_MODER, tempreg);
 	/* pull up */
 	tempreg = read_reg(GPIOA_PUPDR, ~(0x03 << 4));

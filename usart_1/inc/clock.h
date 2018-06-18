@@ -4,7 +4,8 @@
 
 #include "hw_stm32f051r8.h"
 
-extern void SystemInit(void);
+extern void system_init(void);
+extern void enabled_clock(void);
 
 /* end file */
 #endif /* __CLOCK_H__ */

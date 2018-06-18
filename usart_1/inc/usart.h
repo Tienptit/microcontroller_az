@@ -4,8 +4,10 @@
 
 #include "hw_stm32f051r8.h"
 
-extern void UsartInit(void);
-extern void UsartSendAByte(unsigned char data_input);
+extern void usart_init(void);
+extern char usart_send_byte(unsigned char data_input);
+extern char usart_send_string(unsigned char *str_data);
+
 
 /* end file */
 #endif /* __USART_H__ */
