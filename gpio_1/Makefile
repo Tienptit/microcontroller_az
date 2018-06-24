@@ -12,6 +12,7 @@ COMPILER_DIR 	:= C:/tools/gcc_7_2017-q4-major
 
 PREFIX_GCC_COMPILER	:= arm-none-eabi
 CC				:= $(COMPILER_DIR)/bin/$(PREFIX_GCC_COMPILER)-gcc
+OBJCPY			:= $(COMPILER_DIR)/bin/$(PREFIX_GCC_COMPILER)-objcopy
 ASM				:= $(COMPILER_DIR)/bin/$(PREFIX_GCC_COMPILER)-as
 LD				:= $(COMPILER_DIR)/bin/$(PREFIX_GCC_COMPILER)-ld
 
@@ -32,7 +33,10 @@ $(OUTPUT_PATH)/startup_ARMCM0.o: $(SRC_DIR)/startup_ARMCM0.S
 build: $(FILE_TO_LINK) $(LINKER_FILE)
 	@echo "link object files to create new binary image ($(PROJ_NAME).elf)"
 	$(LD) $(LD_OPT) -o $(OUTPUT_PATH)/$(PROJ_NAME).elf
-	
+
+hex: $(OUTPUT_PATH)/$(PROJ_NAME).elf
+	$(OBJCPY) -O ihex $(OUTPUT_PATH)/$(PROJ_NAME).elf $(OUTPUT_PATH)/$(PROJ_NAME).hex
+
 clean:
 	@rm -rf $(OUTPUT_PATH)/*
 
