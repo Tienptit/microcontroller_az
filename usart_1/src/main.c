@@ -17,7 +17,7 @@ void delay(unsigned int timeout)
 
 void main(void)
 {
-    system_init();
+    system_init(PREDIV_1, PLL_MUL_12, PLL_SCR_HSI, PREDIV_1, SYSCLKSOURCE_PLLCLK, APB1_HCLK_1);
     enabled_clock();
     pin_init();
     usart_init();

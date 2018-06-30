@@ -14,6 +14,10 @@
 #define read_2_byte(addr, mask)     *((unsigned short *)(addr)) & (mask)
 #define read_1_byte(addr, mask)     *((unsigned char *)(addr)) & (mask)
 
+typedef unsigned int            u32_t;
+typedef unsigned short          u16_t;
+typedef unsigned char           u8_t;
+
 /* =================== RCC =================== */
 #define BASE_ADDR_RCC           0x40021000u
 #define RCC_CR                  (BASE_ADDR_RCC + 0x00)
@@ -25,6 +29,36 @@
 #define RCC_CFGR3               (BASE_ADDR_RCC + 0x30)
 #define RCC_CR2                 (BASE_ADDR_RCC + 0x34)
 
+#define PREDIV_1                0u
+#define PREDIV_2                1u
+#define PREDIV_3                2u
+#define PREDIV_4                3u
+#define PREDIV_5                4u
+#define PREDIV_6                5u
+#define PREDIV_7                6u
+#define PREDIV_8                7u
+#define PREDIV_9                8u
+#define PREDIV_10               9u
+#define PREDIV_11               10u
+#define PREDIV_12               11u
+#define PREDIV_13               12u
+#define PREDIV_14               13u
+#define PREDIV_15               14u
+#define PREDIV_16               15u
+
+#define PLL_MUL_2               0u
+#define PLL_MUL_3               1u
+#define PLL_MUL_12              10u
+
+#define PLL_SCR_HSI             0u
+
+#define SYSCLKSOURCE_PLLCLK     2u
+
+#define APB1_HCLK_1             0u
+#define APB1_HCLK_2             4u
+#define APB1_HCLK_4             5u
+#define APB1_HCLK_8             6u
+#define APB1_HCLK_16            7u
 /* =================== GPIO =================== */
 #define BASE_ADDR_GPIO          0x48000000u
 #define GPIO_MODER(port)        (BASE_ADDR_GPIO + (0x400u * (port)) + 0x00u)

@@ -22,7 +22,7 @@ void start_systick(unsigned int value)
     unsigned int tempreg;
 
     write_reg(SYST_RVR, value);
-    write_reg(SYST_CVR, value);
+    write_reg(SYST_CVR, 0);
 
     /* start timer */
     tempreg = read_reg(SYST_CSR, ~(1 << 0));
@@ -41,11 +41,11 @@ unsigned int get_state_systick(void)
     return tempreg;
 }
 
-void delay_systick(unsigned int value)
+void delay_ms_systick(unsigned int value)
 {
     while(value--)
     {
-        start_systick(40);
+        start_systick(0xBB7F); /* 1 ms */
         while(0 == get_state_systick());
     }
 }

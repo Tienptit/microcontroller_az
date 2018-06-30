@@ -17,7 +17,7 @@ void delay(unsigned int timeout)
 
 void main(void)
 {
-    system_init();
+    system_init(PREDIV_1, PLL_MUL_12, PLL_SCR_HSI, PREDIV_1, SYSCLKSOURCE_PLLCLK, APB1_HCLK_1);
     enabled_clock();
     pin_init();
     usart_init();
@@ -25,24 +25,12 @@ void main(void)
 
     interrupt_init();
 
-    /* send "Hello world -MCU" to terminal app on PC */
-    usart_send_string("Hello world - MCU\r\n");
-    led_on(LD4_PIN);
-    delay(0xff);
-    led_off(LD4_PIN);
-    delay(0xff);
-
     while(1)
     {
-        if (0 != rx_data)
-        {
-            usart_send_byte(rx_data);
-            rx_data = 0;
-        }
         led_on(LD3_PIN);
-        delay_systick(8000);
+        delay_ms_systick(500);
         led_off(LD3_PIN);
-        delay_systick(8000);
+        delay_ms_systick(500);
     }
 }
 

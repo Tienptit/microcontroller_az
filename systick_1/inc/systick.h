@@ -7,7 +7,7 @@
 extern void systick_init(void);
 extern void start_systick(unsigned int value);
 extern unsigned int get_state_systick(void);
-extern void delay_systick(unsigned int value);
+extern void delay_ms_systick(unsigned int value);
 
 /* end file */
 #endif /* __SYSTICK_H__ */
