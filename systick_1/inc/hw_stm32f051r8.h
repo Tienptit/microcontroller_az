@@ -3,10 +3,18 @@
 #define __HW_STM32F051R8_H__
 
 
-#define write_reg(addr, value)  *((unsigned long int *)(addr)) = value
-#define read_reg(addr, mask)    *((unsigned long int *)(addr)) & (mask)
+#define write_reg(addr, value)      *((unsigned long int *)(addr)) = value
+#define read_reg(addr, mask)        *((unsigned long int *)(addr)) & (mask)
 
-/* RCC - clock */
+#define write_4_byte(addr, value)   *((unsigned int *)(addr)) = value
+#define write_2_byte(addr, value)   *((unsigned short *)(addr)) = value
+#define write_1_byte(addr, value)   *((unsigned char *)(addr)) = value
+
+#define read_4_byte(addr, mask)     *((unsigned int *)(addr)) & (mask)
+#define read_2_byte(addr, mask)     *((unsigned short *)(addr)) & (mask)
+#define read_1_byte(addr, mask)     *((unsigned char *)(addr)) & (mask)
+
+/* =================== RCC =================== */
 #define BASE_ADDR_RCC           0x40021000u
 #define RCC_CR                  (BASE_ADDR_RCC + 0x00)
 #define RCC_CFGR                (BASE_ADDR_RCC + 0x04)
@@ -17,22 +25,34 @@
 #define RCC_CFGR3               (BASE_ADDR_RCC + 0x30)
 #define RCC_CR2                 (BASE_ADDR_RCC + 0x34)
 
-/* GPIO */
-#define BASE_ADDR_GPIOA         0x48000000u
-#define BASE_ADDR_GPIOC         0x48000800u
-#define GPIOC_MODER             (BASE_ADDR_GPIOC + 0x00u)
-#define GPIOA_MODER             (BASE_ADDR_GPIOA + 0x00u)
+/* =================== GPIO =================== */
+#define BASE_ADDR_GPIO          0x48000000u
+#define GPIO_MODER(port)        (BASE_ADDR_GPIO + (0x400u * (port)) + 0x00u)
+#define GPIO_OTYPER(port)       (BASE_ADDR_GPIO + (0x400u * (port)) + 0x04u)
+#define GPIO_OSPEEDR(port)      (BASE_ADDR_GPIO + (0x400u * (port)) + 0x08u)
+#define GPIO_PUPDR(port)        (BASE_ADDR_GPIO + (0x400u * (port)) + 0x0Cu)
+#define GPIO_IDR(port)          (BASE_ADDR_GPIO + (0x400u * (port)) + 0x10u)
+#define GPIO_ODR(port)          (BASE_ADDR_GPIO + (0x400u * (port)) + 0x14u)
+#define GPIO_BSRR(port)         (BASE_ADDR_GPIO + (0x400u * (port)) + 0x18u)
+#define GPIO_LCKR(port)         (BASE_ADDR_GPIO + (0x400u * (port)) + 0x1Cu)
+#define GPIO_AFRL(port)         (BASE_ADDR_GPIO + (0x400u * (port)) + 0x20u)
+#define GPIO_AFRH(port)         (BASE_ADDR_GPIO + (0x400u * (port)) + 0x24u)
+#define GPIO_BRR(port)          (BASE_ADDR_GPIO + (0x400u * (port)) + 0x28u)
+
+/* definition port id */
+#define PORT_A                  0u
+#define PORT_B                  1u
+#define PORT_C                  2u
+#define PORT_D                  3u
+#define PORT_E                  4u
+#define PORT_F                  5u
+
+/* pin mode */
 #define GPIO_MODER_INPUT        0x00u
 #define GPIO_MODER_OUTPUT       0x01u
 #define GPIO_MODER_ALT          0x02u
 
-#define GPIOC_BSRR              (BASE_ADDR_GPIOC + 0x18u)
-
-#define GPIOA_IDR               (BASE_ADDR_GPIOA + 0x10u)
-#define GPIOA_PUPDR             (BASE_ADDR_GPIOA + 0x0Cu)
-#define GPIOA_AFRL              (BASE_ADDR_GPIOA + 0x20u)
-#define GPIOA_AFRH              (BASE_ADDR_GPIOA + 0x24u)
-
+/* alternate */
 #define AF0                     0x0
 #define AF1                     0x1
 #define AF2                     0x2
@@ -49,17 +69,17 @@
 /* user button (B1) - PA0 */
 #define USER_BUTTON             0
 
-/* EXTI */
+/* =================== EXTI =================== */
 #define BASE_ADDR_EXTI          0x40010400u
 #define EXTI_IMR                (BASE_ADDR_EXTI + 0x00u)
 #define EXTI_RTSR               (BASE_ADDR_EXTI + 0x08u)
 #define EXTI_PR                 (BASE_ADDR_EXTI + 0x14u)
 
-/* SYSCFG */
+/* =================== SYSCFG =================== */
 #define BASE_ADDR_SYSCFG        0x40010000u
 #define SYSCFG_EXTICR1          (BASE_ADDR_SYSCFG + 0x08u)
 
-/* NVIC */
+/* =================== NVIC =================== */
 #define NVIC_ISER               0xE000E100u
 #define NVIC_ICER               0xE000E180u
 #define NVIC_ISPR               0xE000E200u
@@ -67,7 +87,7 @@
 #define NVIC_PRI1               0xE000E404u
 #define NVIC_PRI7               0xE000E418u
 
-/* USART */
+/* =================== USART =================== */
 #define BASE_ADDR_USART1        0x40013800u
 
 #define USART_CR1               (BASE_ADDR_USART1 + 0x00)
@@ -80,15 +100,15 @@
 #define USART_RDR               (BASE_ADDR_USART1 + 0x24)
 #define USART_TDR               (BASE_ADDR_USART1 + 0x28)
 
-/* System Timer - Systick */
-#define SYST_CSR								0xE000E010u
-#define SYST_RVR								0xE000E014u
-#define SYST_CVR								0xE000E018u
-#define SYST_CALIB							0xE000E01Cu
+/* =================== System Timer - Systick =================== */
+#define SYST_CSR                0xE000E010u
+#define SYST_RVR                0xE000E014u
+#define SYST_CVR                0xE000E018u
+#define SYST_CALIB              0xE000E01Cu
 
-/* System Controller Block */
-#define SHPR2										0xE000ED1Cu
-#define SHPR3										0xE000ED20u
+/* =================== System Controller Block - SCB =================== */
+#define SHPR2                   0xE000ED1Cu
+#define SHPR3                   0xE000ED20u
 
 /* end file */
 #endif /* __HW_STM32F051R8_H__ */

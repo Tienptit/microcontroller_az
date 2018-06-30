@@ -72,26 +72,26 @@ __Vectors:
 	.long	SysTick_Handler       /* SysTick Handler */
 
 	/* External interrupts */
-	.long	Reserved_IRQHandler         /*  0:  Watchdog Timer            */
-	.long	Reserved_IRQHandler         /*  1:  Real Time Clock           */
-	.long	Reserved_IRQHandler         /*  2:  Timer0 / Timer1           */
-	.long	Reserved_IRQHandler         /*  3:  Timer2 / Timer3           */
-	.long	Reserved_IRQHandler         /*  4:  MCIa                      */
+	.long	Reserved_IRQHandler         /*  0: Reserved                   */
+	.long	Reserved_IRQHandler         /*  1: Reserved                   */
+	.long	Reserved_IRQHandler         /*  2: Reserved                   */
+	.long	Reserved_IRQHandler         /*  3: Reserved                   */
+	.long	Reserved_IRQHandler         /*  4: Reserved                   */
 	.long	EXTI0_1_IRQHandler          /*  5:  EXTI0_1                   */
-	.long	EXTI2_3_IRQHandler         	/*  6:  UART0 - DUT FPGA          */
-	.long	Reserved_IRQHandler         /*  7:  UART1 - DUT FPGA          */
-	.long	Reserved_IRQHandler         /*  8:  UART2 - DUT FPGA          */
-	.long	Reserved_IRQHandler         /*  9:  UART4 - not connected     */
-	.long	Reserved_IRQHandler         /* 10: AACI / AC97                */
-	.long	Reserved_IRQHandler         /* 11: CLCD Combined Interrupt    */
-	.long	Reserved_IRQHandler         /* 12: Ethernet                   */
-	.long	Reserved_IRQHandler         /* 13: USB Device                 */
-	.long	Reserved_IRQHandler         /* 14: USB Host Controller        */
-	.long	Reserved_IRQHandler         /* 15: Character LCD              */
-	.long	Reserved_IRQHandler         /* 16: Flexray                    */
-	.long	Reserved_IRQHandler         /* 17: CAN                        */
-	.long	Reserved_IRQHandler         /* 18: LIN                        */
-	.long	Reserved_IRQHandler         /* 19: I2C ADC/DAC                */
+	.long	EXTI2_3_IRQHandler         	/*  6: Reserved                   */
+	.long	Reserved_IRQHandler         /*  7: Reserved                   */
+	.long	Reserved_IRQHandler         /*  8: Reserved                   */
+	.long	Reserved_IRQHandler         /*  9: Reserved                   */
+	.long	Reserved_IRQHandler         /* 10: Reserved                   */
+	.long	Reserved_IRQHandler         /* 11: Reserved                   */
+	.long	Reserved_IRQHandler         /* 12: Reserved                   */
+	.long	Reserved_IRQHandler         /* 13: Reserved                   */
+	.long	Reserved_IRQHandler         /* 14: Reserved                   */
+	.long	Reserved_IRQHandler         /* 15: Reserved                   */
+	.long	Reserved_IRQHandler         /* 16: Reserved                   */
+	.long	Reserved_IRQHandler         /* 17: Reserved                   */
+	.long	Reserved_IRQHandler         /* 18: Reserved                   */
+	.long	Reserved_IRQHandler         /* 19: Reserved                   */
 	.long	Reserved_IRQHandler         /* 20: Reserved                   */
 	.long	Reserved_IRQHandler         /* 21: Reserved                   */
 	.long	Reserved_IRQHandler         /* 22: Reserved                   */
@@ -100,10 +100,18 @@ __Vectors:
 	.long	Reserved_IRQHandler         /* 25: Reserved                   */
 	.long	Reserved_IRQHandler         /* 26: Reserved                   */
 	.long	Reserved_IRQHandler         /* 27: Reserved                   */
-	.long	Reserved_IRQHandler         /* 28: Reserved - CPU FPGA CLCD   */
-	.long	Reserved_IRQHandler         /* 29: Reserved - CPU FPGA        */
-	.long	Reserved_IRQHandler         /* 30: UART3    - CPU FPGA        */
-	.long	Reserved_IRQHandler         /* 31: SPI Touchscreen - CPU FPGA */
+	.long	Reserved_IRQHandler         /* 28: Reserved                   */
+	.long	Reserved_IRQHandler         /* 29: Reserved                   */
+	.long	Reserved_IRQHandler         /* 30: Reserved                   */
+	.long	Reserved_IRQHandler         /* 31: Reserved                   */
+	.long	Reserved_IRQHandler         /* 32: Reserved                   */
+	.long	Reserved_IRQHandler         /* 33: Reserved                   */
+	.long	Reserved_IRQHandler         /* 34: Reserved                   */
+	.long	Reserved_IRQHandler         /* 35: Reserved                   */
+	.long	Reserved_IRQHandler         /* 36: Reserved                   */
+	.long	Reserved_IRQHandler         /* 37: Reserved                   */
+	.long	Reserved_IRQHandler         /* 38: Reserved                   */
+	.long	Reserved_IRQHandler         /* 39: Reserved                   */
 
 	.size	__Vectors, . - __Vectors
 

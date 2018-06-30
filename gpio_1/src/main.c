@@ -68,8 +68,8 @@ void enabled_clock(void)
 {
 	unsigned int tempreg;
 	/* set mode led ld3 */
-	tempreg = read_reg(RCC_AHBENR, ~(1 << 19));
-	tempreg = tempreg | (1 << 19);
+	tempreg = read_reg(RCC_AHBENR, ~(1 << 17));
+	tempreg = tempreg | (1 << 17);
 	write_reg(RCC_AHBENR, tempreg);
 }
 
@@ -77,8 +77,8 @@ void init_pin(void)
 {
 	unsigned int tempreg;
 	/* set mode led ld3 */
-	tempreg = read_reg(GPIOC_MODER, ~(0x03 << 18));
-	tempreg = tempreg | (GPIO_MODER_OUTPUT << 18);
+	tempreg = read_reg(GPIOC_MODER, ~(0x03 << 14));
+	tempreg = tempreg | (GPIO_MODER_OUTPUT << 14);
 	write_reg(GPIOC_MODER, tempreg);
 }
 
