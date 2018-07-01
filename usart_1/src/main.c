@@ -33,11 +33,16 @@ void main(void)
 
     while(1)
     {
+        #if 1
         if (0 != rx_data)
         {
             usart_send_byte(rx_data);
             rx_data = 0;
         }
+        #else
+        usart_send_byte(0x55);
+        delay(0xf);
+        #endif
     }
 }
 

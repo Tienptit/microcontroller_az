@@ -9,7 +9,7 @@ RAM              0x20000000         0x00001000         xrw
 Linker script and memory map
 
 
-.text           0x08000000      0x8d8
+.text           0x08000000      0x8c4
  *(.vectors)
  .vectors       0x08000000       0xc0 ./output/startup_ARMCM0.o
                 0x08000000                __Vectors
@@ -35,38 +35,38 @@ Linker script and memory map
                 0x080004c0                EXTI2_3_IRQHandler
                 0x080004e8                USART1_IRQHandler
                 0x08000540                interrupt_init
- .text          0x080006c8       0xb0 ./output/main.o
+ .text          0x080006c8       0x9c ./output/main.o
                 0x080006c8                delay
                 0x08000708                main
- .text          0x08000778        0x4 ./output/startup_ARMCM0.o
-                0x08000778                Reset_Handler
- .text          0x0800077c      0x148 ./output/usart.o
-                0x0800077c                usart_init
-                0x0800083c                usart_send_byte
-                0x08000888                usart_send_string
+ .text          0x08000764        0x4 ./output/startup_ARMCM0.o
+                0x08000764                Reset_Handler
+ .text          0x08000768      0x148 ./output/usart.o
+                0x08000768                usart_init
+                0x08000828                usart_send_byte
+                0x08000874                usart_send_string
  *(.init)
  *(.fini)
  *(.rodata*)
- .rodata        0x080008c4       0x14 ./output/main.o
+ .rodata        0x080008b0       0x14 ./output/main.o
  *(.eh_frame*)
 
-.glue_7         0x080008d8        0x0
- .glue_7        0x080008d8        0x0 linker stubs
+.glue_7         0x080008c4        0x0
+ .glue_7        0x080008c4        0x0 linker stubs
 
-.glue_7t        0x080008d8        0x0
- .glue_7t       0x080008d8        0x0 linker stubs
+.glue_7t        0x080008c4        0x0
+ .glue_7t       0x080008c4        0x0 linker stubs
 
-.vfp11_veneer   0x080008d8        0x0
- .vfp11_veneer  0x080008d8        0x0 linker stubs
+.vfp11_veneer   0x080008c4        0x0
+ .vfp11_veneer  0x080008c4        0x0 linker stubs
 
-.v4_bx          0x080008d8        0x0
- .v4_bx         0x080008d8        0x0 linker stubs
+.v4_bx          0x080008c4        0x0
+ .v4_bx         0x080008c4        0x0 linker stubs
 
-.iplt           0x080008d8        0x0
- .iplt          0x080008d8        0x0 ./output/clock.o
+.iplt           0x080008c4        0x0
+ .iplt          0x080008c4        0x0 ./output/clock.o
 
-.rel.dyn        0x080008d8        0x0
- .rel.iplt      0x080008d8        0x0 ./output/clock.o
+.rel.dyn        0x080008c4        0x0
+ .rel.iplt      0x080008c4        0x0 ./output/clock.o
 
 .data           0x20000000        0x0
                 0x20000000                __data_start__ = .
@@ -149,12 +149,12 @@ OUTPUT(./output/stm32f0_discovery_usart.elf elf32-littlearm)
  .debug_aranges
                 0x00000080       0x20 ./output/usart.o
 
-.debug_line     0x00000000      0x30a
+.debug_line     0x00000000      0x317
  .debug_line    0x00000000       0xeb ./output/clock.o
  .debug_line    0x000000eb       0x70 ./output/gpio.o
  .debug_line    0x0000015b       0xbc ./output/interrupt.o
- .debug_line    0x00000217       0x7e ./output/main.o
- .debug_line    0x00000295       0x75 ./output/usart.o
+ .debug_line    0x00000217       0x8b ./output/main.o
+ .debug_line    0x000002a2       0x75 ./output/usart.o
 
 .debug_str      0x00000000      0x2a2
  .debug_str     0x00000000      0x146 ./output/clock.o
