@@ -16,7 +16,7 @@
 #define RCC_AHBENR			(BASE_ADDR_RCC + 0x14)
 
 /* GPIO */
-#define BASE_ADDR_GPIO		0x48000000u
+#define BASE_ADDR_GPIO		0x48000800u
 #define GPIOC_MODER			(BASE_ADDR_GPIO + 0x00u)
 #define GPIO_MODER_INPUT	0x00u
 #define GPIO_MODER_OUTPUT	0x01u
@@ -27,7 +27,7 @@
 
 
 /* Led LD3 - PC9 */
-#define LD3_PIN				7
+#define LD3_PIN				9
 
 /* end file */
 #endif /* __HW_STM32F051R8_H__ */
