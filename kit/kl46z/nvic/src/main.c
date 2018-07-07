@@ -1,10 +1,5 @@
 
-
-#if defined(STM32)
-#include "hw_stm32f030_mini.h"
-#elif defined(NXP)
 #include "hw_frdm_kl46z.h"
-#endif
 
 char state_sw1 = 0;
 
@@ -106,22 +101,19 @@ void main(void)
 void Sw1_IRQHandler(void)
 {
   clean_interrupt_sw1();
-  while(1)
+  if(0 == state_sw1)
   {
-    if(0 == state_sw1)
-    {
-      state_sw1 = 1;
-      /* turn on led */
-      red_led_on();
-    }
-    else
-    {
-      state_sw1 = 0;
-      /* turn off led */
-      red_led_off();
-    }
-		delay(0xff);
+    state_sw1 = 1;
+    /* turn on led */
+    red_led_on();
   }
+  else
+  {
+    state_sw1 = 0;
+    /* turn off led */
+    red_led_off();
+  }
+	delay(0xff);
 }
 
 void Reserved_IRQHandler(void)
@@ -171,5 +163,4 @@ void SysTick_Handler(void)
     /* nothing to be run here */
   }
 }
-
 
